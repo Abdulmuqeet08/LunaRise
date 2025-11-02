@@ -83,3 +83,4 @@ src/assets/*
 # Ignore development configuration
 backend/config/config.json
 
+backend/logs_config/ 
