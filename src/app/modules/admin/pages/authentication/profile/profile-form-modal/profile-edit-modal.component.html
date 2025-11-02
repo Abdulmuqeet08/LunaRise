@@ -1,0 +1,74 @@
+<form [formGroup]="profileEditForm" *ngIf="profileEditForm"
+    class="relative p-10 rounded-3xl shadow-2xl bg-white/80 dark:bg-gray-900/80 w-[1200px] h-[900px] mx-auto border border-gray-300 dark:border-gray-700 backdrop-blur-lg animate-fade-in-smooth transition-all flex flex-col">
+
+    <!-- Close Button -->
+    <button type="button" (click)="closeModal()" 
+        class="absolute top-6 right-6 text-gray-500 dark:text-gray-300 hover:text-gray-700 dark:hover:text-gray-100 transition">
+        <span class="material-icons text-3xl">close</span>
+    </button>
+
+    <!-- Progress Bar & Message -->
+    <div class="relative mb-8">
+        <mat-progress-bar mode="determinate" [value]="progress" class="h-3 rounded-full"></mat-progress-bar>
+        <p class="text-lg font-medium text-gray-600 dark:text-gray-300 mt-3 text-center">{{ progressMessage }}</p>
+    </div>
+
+    <!-- 🔹 Dynamic Steps Rendering -->
+    <div class="flex-grow overflow-auto px-12">
+        <ng-container [ngSwitch]="step">
+            
+            <!-- Step 1: Headline -->
+            <div *ngSwitchCase="1" class="space-y-6">
+                <h3 class="text-2xl font-bold text-blue-700 dark:text-blue-400">🩺 Professional Headline</h3>
+                <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Headline</mat-label>
+                    <input matInput formControlName="Headline" class="text-lg p-3" 
+                        [placeholder]="profileData?.Headline || 'Enter your professional headline'">
+                </mat-form-field>
+            </div>
+
+            <!-- Step 2: Summary -->
+            <div *ngSwitchCase="2" class="space-y-6">
+                <h3 class="text-2xl font-bold text-indigo-700 dark:text-indigo-400">📖 Professional Summary</h3>
+                <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Summary</mat-label>
+                    <textarea matInput formControlName="Summary" class="text-lg p-3" rows="5"
+                        [placeholder]="profileData?.Summary || 'Briefly describe your background'"></textarea>
+                </mat-form-field>
+            </div>
+
+            <!-- Step 3: Skills & Specialties -->
+            <div *ngSwitchCase="3" class="space-y-6">
+                <h3 class="text-2xl font-bold text-green-700 dark:text-green-400">💉 Skills & Specialties</h3>
+                <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Medical Specialties</mat-label>
+                    <input matInput formControlName="Skills" class="text-lg p-3"
+                        [placeholder]="profileData?.Skills || 'E.g., Surgery, Pediatrics'">
+                </mat-form-field>
+            </div>
+
+            <!-- Step 4: Certifications & Licenses -->
+            <div *ngSwitchCase="4" class="space-y-6">
+                <h3 class="text-2xl font-bold text-purple-700 dark:text-purple-400">📜 Certifications & Licenses</h3>
+                <mat-form-field class="w-full" appearance="outline">
+                    <mat-label>Medical Certifications</mat-label>
+                    <input matInput formControlName="Certifications" class="text-lg p-3"
+                        [placeholder]="profileData?.Certifications || 'E.g., MBBS, MD, Nursing License'">
+                </mat-form-field>
+            </div>
+        </ng-container>
+    </div>
+
+    <!-- Navigation Buttons -->
+    <div class="flex justify-between mt-10 px-12">
+        <button mat-stroked-button *ngIf="step > 1" (click)="prevStep()" color="primary"
+            class="text-lg px-6 py-3 rounded-lg flex items-center gap-2">
+            <span class="material-icons">arrow_back</span> Back
+        </button>
+
+        <button mat-flat-button color="primary" (click)="step === totalSteps ? saveProfile() : nextStep()"
+            class="text-lg px-6 py-3 rounded-lg flex items-center gap-2">
+            {{ step === totalSteps ? 'Save Changes 💾' : 'Next →' }}
+        </button>
+    </div>
+</form>

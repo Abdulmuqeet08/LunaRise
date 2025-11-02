@@ -1,0 +1,198 @@
+<div class="flex flex-col flex-auto min-w-0 p-4">
+
+    <!-- Header -->
+    <div class="flex flex-col w-full shadow bg-card">
+
+        <!-- Cover image -->
+        <div class="relative">
+            <img
+                class="object-cover w-full h-40 lg:h-80 rounded-xl"
+                [src]="'assets/images/pages/profile/cover.jpg'"
+                alt="User Cover Image"
+            >
+        </div>
+
+    </div>
+
+<!-- Cycle Data Card -->
+<div class="my-6 p-6 rounded-lg shadow-md bg-card">
+    <h2 class="text-xl font-semibold mb-4">Cycle Data</h2>
+
+    <form [formGroup]="cycleForm" (ngSubmit)="submitCycleForm()">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+            <!-- Start Date -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Start Date</mat-label>
+                <input matInput [matDatepicker]="startPicker" formControlName="StartDate"
+                       class="bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600" />
+                <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+                <mat-datepicker #startPicker></mat-datepicker>
+            </mat-form-field>
+
+            <!-- End Date -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>End Date</mat-label>
+                <input matInput [matDatepicker]="endPicker" formControlName="EndDate"
+                       class="bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600" />
+                <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+                <mat-datepicker #endPicker></mat-datepicker>
+            </mat-form-field>
+
+            <!-- Cycle Length -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Cycle Length (days)</mat-label>
+                <input matInput type="number" formControlName="CycleLength"
+                       class="bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600" />
+            </mat-form-field>
+
+            <!-- Average Period Length -->
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Average Period Length (days)</mat-label>
+                <input matInput type="number" formControlName="AveragePeriodLength"
+                       class="bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600" />
+            </mat-form-field>
+        </div>
+
+        <!-- Description -->
+        <div class="mt-6">
+            <label for="Description" class="block text-sm font-medium">Description</label>
+            <textarea 
+                id="Description" 
+                formControlName="Description" 
+                rows="4" 
+                class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm 
+                       focus:outline-none focus:ring-2 focus:ring-blue-500 
+                       bg-white dark:bg-gray-800 dark:text-white dark:border-gray-600"
+            ></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="flex justify-center mt-6">
+            <button 
+            class="mt-6 px-8"
+            mat-flat-button
+            [color]="'primary'"
+            type="submit" 
+            [disabled]="cycleForm.invalid"
+            class="px-6 py-2   font-medium rounded-lg  focus:outline-none focus:ring-2 ">
+                Save Cycle Data
+            </button>
+        </div>
+    </form>
+</div>
+
+
+
+
+<!-- Buttons for Model 1 and Model 2 side by side -->
+<div class="flex justify-center mt-6">
+    <button 
+        class="mt-6 px-8 mx-2"
+        mat-flat-button
+        [color]="'primary'"
+        type="button"
+        (click)="openModelFrame('model1')">
+        Predict Next Cycle
+    </button>
+
+    <button 
+        class="mt-6 px-8 mx-2"
+        mat-flat-button
+        [color]="'primary'"
+        type="button"
+        (click)="openModelFrame('model2')">
+        Predict PCOS
+    </button>
+</div>
+
+<!-- Iframe for Model 1 -->
+<div *ngIf="showModel1" class="mt-6">
+    <iframe [src]="modelUrl1" width="100%" height="800px" style="border: none;"></iframe>
+    <div class="flex justify-center mt-2">
+        <button class="mt-2 px-6" mat-flat-button [color]="'primary'" (click)="closeModelFrame('model1')">
+            Close
+        </button>
+    </div>
+</div>
+
+<!-- Iframe for Model 2 -->
+<div *ngIf="showModel2" class="mt-6">
+    <iframe [src]="modelUrl2" width="100%" height="800px" style="border: none;"></iframe>
+    <div class="flex justify-center mt-2">
+        <button class="mt-2 px-6" mat-flat-button [color]="'primary'" (click)="closeModelFrame('model2')">
+            Close
+        </button>
+    </div>
+</div>
+
+ <!-- <div *ngIf="predictCycleDate" class="my-6 p-6 rounded-lg shadow-md bg-card">
+    <h2 class="text-xl font-semibold mb-4">Predicted Date</h2>
+    <p class="text-lg">Your predicted next cycle date is: <strong>{{ predictedDate }}</strong></p>
+</div>  -->
+
+
+<div class="my-10">
+    <h2 class="text-2xl font-bold text-center mb-6">
+        Related content
+        <div class="h-1 w-16 bg-yellow-400 mx-auto mt-2 rounded"></div>
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        
+
+<!-- Card 1 -->
+<a href="https://youtu.be/ayzN5f3qN8g" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden shadow-md bg-card hover:shadow-lg transition-shadow duration-300">
+    <div class="relative">
+        <img src="assets/images/cards/videoc-1.jpg" alt="Female Growth" class="w-full h-48 object-cover">
+        <div class="absolute bottom-2 left-2 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded">
+            FEMALE GROWTH AND DEVELOPMENT
+        </div>
+    </div>
+    <div class="p-4 text-center">
+        <div class="text-lg font-semibold hover:text-blue-600">
+            How Menstrual Cycle Works..
+        </div>
+    </div>
+</a>
+
+
+        <!-- Card 2 -->
+        <a href="https://youtu.be/Mc5iK0AtGNc" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden shadow-md bg-card hover:shadow-lg transition-shadow duration-300">
+            <div class="relative">
+                <img src="assets/images/cards/videoc-2.jpeg" alt="Female Growth" class="w-full h-48 object-cover">
+                <div class="absolute bottom-2 left-2 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded">
+                    PCOS Awareness  
+                </div>
+            </div>
+            <div class="p-4 text-center">
+                <div class="text-lg font-semibold hover:text-blue-600">
+                    "Everything You Need to Know About PCOS"
+                </div>
+            </div>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="https://youtu.be/NO2spv_IIUE" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden shadow-md bg-card hover:shadow-lg transition-shadow duration-300">
+            <div class="relative">
+                <img src="assets/images/cards/videoc-3.jpg" alt="Female Growth" class="w-full h-48 object-cover">
+                <div class="absolute bottom-2 left-2 bg-blue-800 text-white text-xs font-bold px-3 py-1 rounded">
+                    Period Cramps
+                </div>
+            </div>
+            <div class="p-4 text-center">
+                <div class="text-lg font-semibold hover:text-blue-600">
+                    "Dealing with Menstrual Cramps: Causes and Home Remedies"
+                </div>
+            </div>
+        </a>
+  
+    </div>
+</div>
+</div>
+
+
+
+
+
+  

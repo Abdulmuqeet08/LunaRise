@@ -1,0 +1,90 @@
+<!-- Hidden File Input -->
+<input type="file" #fileInput (change)="onFileSelected($event)" multiple hidden>
+
+<!-- Modal Upload Section -->
+<div *ngIf="isDialogMode && isModalOpen" class="fixed inset-0 flex items-center justify-center p-4 bg-black bg-opacity-50">
+  <div class="relative bg-white dark:bg-gray-900 shadow-lg rounded-lg w-full max-w-lg h-auto max-h-[90vh] flex flex-col items-center p-6 sm:w-3/4 md:w-1/2 overflow-auto">
+    
+    <!-- Close Button -->
+    <button class="absolute p-2 text-gray-600 transition-all bg-gray-200 rounded-full dark:text-gray-300 dark:bg-gray-700 top-3 right-3 hover:bg-gray-300 dark:hover:bg-gray-600" 
+            (click)="closeModal()">
+      <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Upload Box with Drag & Drop -->
+    <div class="flex flex-col items-center justify-center w-full p-4 transition-all border-2 border-gray-300 border-dashed rounded-lg cursor-pointer h-44 dark:border-gray-600 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800"
+         (click)="triggerFileInput(fileInput)" 
+         (dragover)="onDragOver($event)" 
+         (drop)="onDrop($event)">
+      <mat-icon class="text-4xl text-gray-400 transition-all dark:text-gray-300 group-hover:text-blue-600 animate-bounce">cloud_upload</mat-icon>
+      <span class="mt-3 text-lg font-semibold text-gray-700 dark:text-gray-300">Click or Drag & Drop to upload</span>
+      <span class="text-sm text-gray-500 dark:text-gray-400">Supports PNG, JPG, and GIF files</span>
+    </div>
+
+
+    <!-- <div *ngIf="imagePreviews" class="relative w-full mt-4">
+      <img [src]="preview" class="object-cover w-full transition-all rounded-lg shadow-md max-h-52 hover:scale-105">
+    -->
+    <!-- Multiple Image Previews -->
+    <div *ngIf="imagePreviews.length > 0" class="grid grid-cols-3 gap-2 mt-4">
+      <div *ngFor="let preview of imagePreviews; let i = index" class="relative">
+        <img [src]="preview" class="object-cover w-full h-20 rounded-lg shadow-md">
+        <button class="absolute top-1 right-1 p-1 bg-red-500 rounded-full text-white" (click)="clearImages()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Upload Progress Bar -->
+    <div *ngIf="isUploading" class="relative w-full mt-4">
+      <div class="w-full h-4 bg-gray-200 rounded-full">
+        <div class="h-4 transition-all duration-500 ease-in-out rounded-full" 
+             [style.width.%]="uploadProgress"
+             [ngStyle]="{'background-color': 'lightgreen'}">
+        </div>
+      </div>
+      <p class="mt-1 text-sm text-center text-gray-600">{{ uploadProgress }}%</p> 
+    </div>
+
+    <!-- Upload Action Buttons -->
+    <div class="flex justify-between w-full px-6 mt-4">
+      <button class="px-4 py-2 text-white transition-all bg-red-500 rounded-md hover:bg-red-600" (click)="closeModal()">
+        <mat-icon class="mr-2">close</mat-icon> Cancel
+      </button>
+      <button class="px-4 py-2 text-white transition-all bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              [disabled]="selectedFiles.length === 0 || isUploading" (click)="uploads()">
+        <mat-icon class="mr-2">cloud_upload</mat-icon> Upload
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Inline Upload Section (If Modal is Disabled) -->
+<div *ngIf="!isDialogMode" class="flex flex-col items-center justify-center w-full">
+  <!-- Upload Box -->
+  <div class="flex flex-col items-center justify-center w-full p-4 transition-all border-2 border-gray-300 border-dashed rounded-lg cursor-pointer h-44 dark:border-gray-600 hover:border-blue-500 hover:bg-blue-50 dark:hover:bg-gray-800"
+       (click)="triggerFileInput(fileInput)"
+       (dragover)="onDragOver($event)" 
+       (drop)="onDrop($event)">
+    
+    <!-- Animated Upload Icon -->
+    <mat-icon class="text-4xl text-gray-400 transition-all dark:text-gray-300 group-hover:text-blue-600 animate-bounce">cloud_upload</mat-icon>
+    
+    <!-- Upload Text -->
+    <span class="mt-3 text-lg font-semibold text-gray-700 dark:text-gray-300">Click or Drag & Drop to upload</span>
+    <span class="text-sm text-gray-500 dark:text-gray-400">Supports PNG, JPG, and GIF files</span>
+  </div>
+
+  <!-- Preview Images -->
+  <div *ngIf="imageUrl?.length > 0">
+    <img *ngFor="let url of imageUrl" [src]="url" alt="Uploaded Image">
+  </div>
+
+
+  <!-- Upload Button -->
+  <button class="px-6 py-2 mt-4 text-white transition-all bg-blue-600 rounded-md shadow-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+          [disabled]="selectedFiles.length === 0 || isUploading"
+          (click)="uploads()">
+    <mat-icon class="mr-2">cloud_upload</mat-icon> Upload Images
+  </button>
+</div>

@@ -1,0 +1,6 @@
+apps:
+  - script   : index.js
+    watch  : false
+    name    : 'uat-activeclub-classes-api'
+    env:
+      NODE_ENV: uat

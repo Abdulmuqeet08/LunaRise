@@ -1,0 +1,6 @@
+apps:
+  - script   : index.js
+    watch  : false
+    name    : 'activeclub-classes-api'
+    env:
+      NODE_ENV: qa

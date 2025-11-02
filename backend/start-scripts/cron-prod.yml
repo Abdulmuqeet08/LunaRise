@@ -1,0 +1,6 @@
+apps:
+  - script: cron-service-index.js
+    watch: false
+    name: "cron-prod"
+    env:
+      NODE_ENV: production

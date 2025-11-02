@@ -1,0 +1,6 @@
+apps:
+  - script   : cron-service-index.js
+    watch  : false
+    name    : 'cron-uat'
+    env:
+      NODE_ENV: uat

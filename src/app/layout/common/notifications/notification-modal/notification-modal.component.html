@@ -1,0 +1,104 @@
+<div class="max-w-4xl mx-auto bg-white rounded-lg shadow-lg relative">
+    <!-- Close Button -->
+    <button mat-icon-button class="absolute top-2 right-2 text-gray-500 hover:text-gray-700" 
+            (click)="matDialogRef.close()">
+        <mat-icon>close</mat-icon>
+    </button>
+
+    <!-- Event Header Section -->
+    <div class="p-6 border-b bg-gray-50 rounded-t-lg">
+        <div class="flex items-center justify-between mb-4">
+            <span class="px-3 py-1 text-sm font-medium rounded-full" 
+                  [ngClass]="{'bg-green-100 text-green-800': NotificationForm.get('EventStatus')?.value === 'Active',
+                             'bg-yellow-100 text-yellow-800': NotificationForm.get('EventStatus')?.value === 'Pending',
+                             'bg-red-100 text-red-800': NotificationForm.get('EventStatus')?.value === 'Cancelled'}">
+                {{ NotificationForm.get('EventStatus')?.value }}
+            </span>
+            <div *ngIf="NotificationForm.get('IsVirtual')?.value" 
+                 class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm flex items-center">
+                <mat-icon class="text-sm mr-1">computer</mat-icon>
+                Virtual Event
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-semibold mb-6">{{ NotificationForm.get('EventName')?.value }}</h2>
+        
+        <!-- Event Description -->
+        <div class="mb-6 text-gray-800 leading-relaxed bg-white rounded-lg p-5 border border-gray-100">
+            {{ NotificationForm.get('Description')?.value }}
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+            <!-- Date & Time -->
+            <div class="flex items-center">
+                <mat-icon class="text-primary text-xl mr-3">schedule</mat-icon>
+                <div>
+                    <div class="font-medium">{{ NotificationForm.get('StartDateTime')?.value | date:'EEEE, MMMM d, y' }}</div>
+                    <div class="text-gray-600">
+                        {{ NotificationForm.get('StartDateTime')?.value | date:'h:mm a' }} - 
+                        {{ NotificationForm.get('EndDateTime')?.value | date:'h:mm a' }}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Location -->
+            <div class="flex items-center">
+                <mat-icon class="text-primary text-xl mr-3">location_on</mat-icon>
+                <div>
+                    <div class="font-medium">{{ NotificationForm.get('Room')?.value }}</div>
+                    <div class="text-gray-600">{{ NotificationForm.get('Address')?.value }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="p-6">
+        <!-- Speaker Information -->
+        <div>
+            <h3 class="text-xl font-semibold mb-4">Speaker</h3>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <div class="flex items-center mb-6">
+                    <div class="bg-primary-100 rounded-full p-4 mr-4">
+                        <mat-icon class="text-primary text-2xl">person</mat-icon>
+                    </div>
+                    <div>
+                        <h4 class="text-lg font-semibold">{{ NotificationForm.get('SpeakerName')?.value }}</h4>
+                        <p class="text-gray-600">Featured Speaker</p>
+                    </div>
+                </div>
+
+                <!-- Speaker Bio -->
+                <div class="mb-4">
+                    <div class="flex items-start">
+                        <mat-icon class="text-primary mr-3 mt-1">school</mat-icon>
+                        <div class="flex-1">
+                            <div class="text-sm font-medium text-gray-600 mb-2">Biography</div>
+                            <p class="text-gray-800">{{ NotificationForm.get('Bio')?.value }}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="pt-4 border-t border-gray-200">
+                    <div class="flex items-start">
+                        <mat-icon class="text-primary mr-3 mt-1">call</mat-icon>
+                        <div class="flex-1">
+                            <div class="text-sm font-medium text-gray-600 mb-2">Contact Information</div>
+                            <p class="text-gray-800">{{ NotificationForm.get('ContactInfo')?.value }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Register Now Button -->
+        <div class="mt-6 text-center">
+            <button *ngIf="NotificationForm.get('RegistrationRequired')?.value"
+                mat-flat-button color="primary" class="px-6 py-2 text-white bg-indigo-600 rounded-lg"
+                (click)="registerForEvent()">
+                Register Now
+            </button>
+        </div>
+    </div>
+</div>

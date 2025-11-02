@@ -1,0 +1,1 @@
+require('resources/UploadModule/api/upload_module_api.js');

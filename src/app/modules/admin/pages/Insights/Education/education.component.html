@@ -1,0 +1,20 @@
+<!-- <h2 mat-dialog-title *ngIf="data?.title">{{ data.title }}</h2> -->
+
+<mat-dialog-content>
+  
+
+  <h1 class="edu-title">{{ data.title }}</h1>
+
+  <div class="questions-answers">
+    <ul class="edu-list">
+      <li *ngFor="let point of data.points; let i = index">
+        <strong>{{ point }}</strong><br />
+        <span [innerHTML]="data.answers[i]"></span> 
+      </li>
+    </ul>
+  </div>
+</mat-dialog-content>
+
+<!-- <mat-dialog-actions>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions> -->

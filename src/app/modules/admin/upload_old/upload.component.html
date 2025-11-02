@@ -1,0 +1,74 @@
+<div class="flex min-w-0 flex-auto flex-col items-center sm:flex-row sm:justify-center md:items-start md:justify-start">
+  <!-- Logo -->
+  <div class="absolute top-2 left-2 bottom-2 z-50 w-16 h-auto sm:w-20 sm:top-4 sm:left-4 sm:bottom-4 pb-24 sm:pb-4">
+      <img src="assets/images/logo/logo.png" alt="Logo" class="w-full h-auto" />
+  </div>
+<div class="flex flex-auto min-w-0">
+  <div class="flex-auto p-6 sm:p-10">
+    <div class="max-w-3xl">
+      <div class="upload-container">
+        <div class="upload-zone" 
+             [class.dragging]="dragging"
+             (dragover)="onDragOver($event)"
+             (dragleave)="onDragLeave($event)"
+             (drop)="onFileDropped($event)">
+          
+          <input type="file"
+                 #fileInput
+                 [multiple]="true"
+                 [accept]="config.accept.join(',')"
+                 (change)="onFileSelected($event)"
+                 style="display: none">
+
+          <div class="upload-content">
+            <mat-icon class="upload-icon">cloud_upload</mat-icon>
+            <h3>{{ config.label }}</h3>
+            <p>Drag and drop files here or</p>
+            <button mat-raised-button color="primary" (click)="fileInput.click()">
+              Browse Files
+            </button>
+            <p class="hint" *ngIf="config.hint">{{ config.hint }}</p>
+            <p class="requirements">
+              Accepted types: {{ config.accept.join(', ') }} | 
+              Max size: {{ config.maxFileSize | fileSize }}
+            </p>
+          </div>
+        </div>
+
+        <div class="file-list" *ngIf="files.length > 0">
+          <mat-card *ngFor="let file of files; let i = index" class="file-item">
+            <mat-card-content>
+              <div class="file-info">
+                <mat-icon>insert_drive_file</mat-icon>
+                <span class="file-name">{{ file.file.name }}</span>
+                <span class="file-size">{{ file.file.size | fileSize }}</span>
+              </div>
+              
+              <mat-progress-bar
+                *ngIf="file.status === 'uploading'"
+                [value]="file.progress"
+                mode="determinate">
+              </mat-progress-bar>
+
+              <div class="file-actions">
+                <button mat-icon-button color="warn" (click)="removeFile(i)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </div>
+            </mat-card-content>
+          </mat-card>
+        </div>
+
+        <div class="upload-actions" *ngIf="files.length > 0">
+          <button mat-raised-button 
+                  color="primary" 
+                  (click)="uploadFiles()"
+                  [disabled]="!hasPendingFiles()">
+            Upload Files
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 
+</div>

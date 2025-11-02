@@ -1,0 +1,20 @@
+{
+  "/devapi/": {
+    "target": "http://localhost:4201/",
+    "secure": false,
+    "pathRewrite": {
+      "^/devapi/": ""
+    },     
+    "logLevel": "debug"
+  },
+ 
+  "/api/": {
+    "target": "http://localhost:8443/",
+    "secure": true,
+    "pathRewrite": {
+      "^/api/": ""
+    },     
+    "logLevel": "debug"
+  }
+  
+}

@@ -1,0 +1,9 @@
+require('resources/session/apis/admin-login-api.js');
+require('resources/session/apis/verifyUserName.js');
+require('resources/session/apis/reset-password.js');
+require('resources/session/apis/reset-password-request.js');
+require('resources/session/apis/reset-password-request-notifications.js');
+require('resources/session/apis/approve-password-request.js');
+require('resources/session/apis/guest-registration.js');
+require('resources/session/apis/signup.js');
+require('resources/session/apis/user-master-api.js');

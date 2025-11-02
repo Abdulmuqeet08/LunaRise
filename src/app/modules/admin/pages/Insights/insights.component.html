@@ -1,0 +1,13 @@
+<div class="education-container">
+  <h2 class="section-title">Education Hub</h2>
+
+  <div class="education-grid">
+    <div class="edu-card" *ngFor="let topic of educationTopics" (click)="openDialog(topic)">
+      <img [src]="topic.image" alt="{{ topic.title }}" class="edu-image" />
+      <h3 class="edu-title">{{ topic.title }}</h3>
+      <ul class="edu-list">
+        <li *ngFor="let point of topic.points">{{ point }}</li>
+      </ul>
+    </div>
+  </div>
+</div>

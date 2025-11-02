@@ -1,0 +1,40 @@
+/* Add this in your component's CSS file (e.g., menstrual-cycle.component.css) */
+.edu-title {
+  font-size: 29px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.edu-list {
+  list-style-type: none; /* Remove default bullet points */
+  padding-left: 0;
+}
+
+.edu-list li {
+  margin-bottom: 20px; /* Add space between each list item (more space between answers) */
+}
+
+.edu-list li strong {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.edu-list li span {
+  display: block;
+  margin-top: 5px;
+  font-size: 14px;
+}
+
+ul {
+  padding-left: 20px; /* Indentation for the bullet points */
+}
+
+ul li {
+  margin-bottom: 10px; /* Space between each bullet point */
+}
+
+h3 {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}

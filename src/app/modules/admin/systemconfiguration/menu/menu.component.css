@@ -1,0 +1,37 @@
+table {
+    width: 100%;
+  }
+  th.mat-sort-header-sorted {
+    color: black;
+  }
+  .icon-display {
+    transform: scale(1);
+ }
+ .mat-icon {
+    font-size: 20px;
+ }
+ .example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+  margin-bottom: 10px;
+}
+
+.mat-table {
+  overflow: auto;
+  max-height: 500px;
+}
+.mat-table th { 
+  resize: horizontal;  
+  overflow:hidden;
+}
+
+/* .mat-header-cell {
+  flex-direction: column;
+  justify-content: center;
+}
+.mat-cell {
+  text-align: center;
+  justify-content:center;
+} */

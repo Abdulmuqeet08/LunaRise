@@ -1,0 +1,20 @@
+<iframe
+  [tabIndex]="tabIndex"
+  [src]="urlMap"
+  width="850px"
+  height="500px"
+  frameborder="0"
+  style="border:0"
+  allowfullscreen
+></iframe>
+<div mat-dialog-actions>
+  <button
+    [tabIndex]="getIndex(tabIndex)"
+    type="button"
+    mat-stroked-button
+    color="danger"
+    (click)="CloseDialog()"
+  >
+    Close
+  </button>
+</div>

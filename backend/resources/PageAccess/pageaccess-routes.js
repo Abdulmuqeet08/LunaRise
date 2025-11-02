@@ -1,0 +1,1 @@
+require('resources/PageAccess/apis/pageaccess-api.js');

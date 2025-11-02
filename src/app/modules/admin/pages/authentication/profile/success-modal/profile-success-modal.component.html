@@ -1,0 +1,33 @@
+<div class="fixed inset-0 flex items-center justify-center bg-black/50 backdrop-blur-lg z-50">
+    <div class="bg-white p-8 rounded-2xl shadow-2xl w-[400px] text-center border border-gray-300 animate-fade-in">
+        
+        <!-- Trophy Icon -->
+        <div class="flex justify-center mb-4">
+            <span class="material-icons text-green-500 text-6xl">emoji_events</span>
+        </div>
+
+        <!-- Congratulations Message -->
+        <h2 class="text-2xl font-bold text-blue-700">Congratulations! 🎉</h2>
+        <p class="text-sm text-gray-600 mt-2">
+            You've successfully completed your profile. Your healthcare journey starts now!
+        </p>
+
+        <!-- Achievement Badge Animation -->
+        <div class="mt-4 animate">
+            <img src="assets/images/logo/p4u-profile.png" alt="Healthcare Pro Badge" class="w-32 mx-auto">
+        </div>
+
+        <!-- Unlocked Badge Info -->
+        <p class="text-lg text-gray-800 font-semibold mt-3">
+            You've unlocked the <span class="text-blue-500 font-bold">"Healthcare Hero"</span> badge!
+        </p>
+        <p class="text-sm text-gray-500">
+            Your profile is now visible to recruiters & healthcare professionals.
+        </p>
+
+        <!-- Buttons -->
+        <div class="flex justify-center gap-4 mt-6">
+            <button mat-stroked-button color="primary" class="px-6 py-2" (click)="closeModal()">Got It!</button>
+        </div>
+    </div>
+</div>

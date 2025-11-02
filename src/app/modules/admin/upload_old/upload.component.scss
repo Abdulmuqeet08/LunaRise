@@ -1,0 +1,21 @@
+.upload-actions {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.file-item {
+  .file-info {
+    .status-icon {
+      &.success { color: #4caf50; }
+      &.error { color: #f44336; }
+      &.uploading { color: #2196f3; }
+    }
+  }
+
+  .error-message {
+    color: #f44336;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+}

@@ -1,0 +1,1 @@
+require("resources/UserProfile/apis/user-profile-api.js")

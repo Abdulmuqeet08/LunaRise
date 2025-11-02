@@ -1,0 +1,83 @@
+<div class="min-h-screen flex flex-col">
+    <!-- Header -->
+    <div class="relative px-6 pt-8 pb-4 bg-card">
+        <!-- Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 bg-primary-50 dark:bg-primary-900"></div>
+        </div>
+
+        <!-- Logo and Title Container -->
+        <div class="relative z-10 flex flex-col lg:flex-row lg:items-center lg:justify-center max-w-7xl mx-auto">
+            <!-- Logo -->
+            <div class="flex items-center lg:ml-0">
+                <img
+                    class="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-contain"
+                    src="assets/images/logo/logo.png"
+                    alt="LUNARISE">
+            </div>
+
+            <!-- Title -->
+            <div class="mt-4 lg:mt-4 lg:ml-8 text-left lg:text-center flex-1">
+                <h2 class="text-3xl lg:text-4xl font-extrabold tracking-tight leading-tight">
+                    Empowering Menstrual Health with LUNARISE
+                </h2>
+                <div class="mt-2 text-lg tracking-tight text-secondary">
+                    Track your cycle, monitor symptoms, access personalized health insights, and connect with care—redefining how we support menstrual health.
+                </div>
+                <div class="mt-4 space-x-2 text-center">
+                    <button
+                        class="mt-6 px-8"
+                        mat-flat-button
+                        [color]="'primary'"
+                        [routerLink]="'/sign-up'">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="px-6 py-10 bg-background text-center">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="text-2xl font-semibold text-primary">
+                Your Personal Health Companion
+            </h3>
+            <p class="mt-2 text-secondary text-lg">
+                LUNARISE is designed to help you stay in tune with your body. Learn, track, and connect — all in one intuitive platform that respects and supports your unique journey.
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Features Section -->
+    <div class="flex-grow p-6 sm:p-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6" [@fadeIn]>
+            <div *ngFor="let feature of features"
+                 class="flex flex-col p-6 bg-card shadow rounded-2xl overflow-hidden hover:shadow-lg transition-shadow duration-300">
+                <div class="flex items-center">
+                    <mat-icon
+                        [svgIcon]="feature.icon"
+                        class="icon-size-8 text-primary">
+                    </mat-icon>
+                </div>
+                <div class="mt-3">
+                    <div class="text-xl font-semibold">{{ feature.title }}</div>
+                    <div class="mt-2 text-secondary">{{ feature.description }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Community CTA -->
+    <!-- <div class="px-6 py-12 bg-muted text-center">
+        <div class="max-w-3xl mx-auto">
+            <h4 class="text-xl font-medium">Join our community</h4>
+            <p class="text-secondary mt-2">
+                Connect with others, share your experiences, and find support on your journey.
+            </p>
+            <button class="mt-6 px-6 py-2 rounded-full bg-primary text-white hover:bg-primary-700 transition">
+                Join the Forum
+            </button>
+        </div>
+    </div> -->
+</div>

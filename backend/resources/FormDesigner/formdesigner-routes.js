@@ -1,0 +1,1 @@
+require('resources/FormDesigner/apis/form-designer-api.js');

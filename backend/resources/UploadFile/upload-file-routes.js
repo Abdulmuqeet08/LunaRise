@@ -1,0 +1,1 @@
+require('resources/UploadFile/apis/file-upload-api.js');

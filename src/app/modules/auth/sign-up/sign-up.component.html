@@ -1,0 +1,261 @@
+<div class="flex flex-col items-center flex-auto min-w-0 sm:justify-center md:p-4">
+    <div class="flex overflow-hidden md:w-full md:max-w-6xl sm:rounded-2xl sm:shadow sm:bg-card">
+        <div class="w-full px-4 py-2 sm:w-auto sm:p-6 md:p-8">
+            <div class="w-full mx-auto max-w-80 sm:w-80 sm:mx-0">
+                <!-- Logo -->
+             
+
+                <!-- Title -->
+                <div class="text-4xl font-extrabold leading-tight tracking-tight">Sign up</div>
+                <div class="flex items-baseline mt-0.5 font-medium">
+                    <div>Already have an account?</div>
+                    <a
+                        class="ml-1 text-primary-500 hover:underline"
+                        [routerLink]="['/pages/authentication/sign-in']">Sign in
+                    </a>
+                </div>
+
+                <!-- Alert -->
+                <fuse-alert
+                    class="mt-8 -mb-4"
+                    *ngIf="showAlert"
+                    [appearance]="'outline'"
+                    [showIcon]="false"
+                    [type]="alert.type"
+                    [@shake]="alert.type === 'error'">
+                    {{alert.message}}
+                </fuse-alert>
+
+                <!-- Sign Up form -->
+                <form
+                    class="mt-8"
+                    [formGroup]="signUpForm">
+
+                    <!-- Name field -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Username</mat-label>
+                        <input
+                            id="username"
+                            matInput
+                            [formControlName]="'username'" (change)="verifyUserName($event)">
+                        <mat-error *ngIf="signUpForm.get('username').hasError('required')">
+                            User name is required
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <!-- Email field -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Email address</mat-label>
+                        <input
+                            id="email"
+                            matInput
+                            [formControlName]="'email'" (change)="verifyEmail($event)">
+                        <mat-error *ngIf="signUpForm.get('email').hasError('required')">
+                            Email address is required
+                        </mat-error>
+
+                        <mat-error *ngIf="signUpForm.get('email').hasError('email')">
+                            Please enter a valid email address
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Phone Number and Country Code Container -->
+                    <div class="flex w-full space-x-2">
+                        <!-- Country Code Dropdown -->
+                        <div class="flex w-full gap-4">
+                            <!-- Country Code Field -->
+                            <mat-form-field class="w-1/3">
+                                <mat-label>Country Code</mat-label>
+                                <mat-select formControlName="CountryCode" panelClass="dropdown-below">
+                                    <mat-option value="" disabled>Select</mat-option>
+                                    <mat-option *ngFor="let country of countries" [value]="country.dialCode">
+                                        {{ country.name }} ({{ country.dialCode }})
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="signUpForm.get('CountryCode').hasError('required')">
+                                    Country code is required
+                                </mat-error>
+                            </mat-form-field>
+                        
+                            <!-- Phone Number Field -->
+                            <mat-form-field class="w-2/3">
+                                <mat-label>Phone Number</mat-label>
+                                <input 
+                                    id="ContactNumber"
+                                    matInput 
+                                    type="tel" 
+                                    formControlName="ContactNumber"
+                                    placeholder="Enter phone number">
+                                <mat-error *ngIf="signUpForm.get('ContactNumber').hasError('required')">
+                                    Phone number is required
+                                </mat-error>
+                                <mat-error *ngIf="signUpForm.get('ContactNumber').hasError('invalidPhone')">
+                                    Please enter a valid phone number
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        </div>
+                    <!-- Password field -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Password</mat-label>
+                        <input
+                            id="password"
+                            matInput
+                            type="password"
+                            [formControlName]="'password'"
+                            #passwordField>
+                        <button
+                            mat-icon-button
+                            type="button"
+                            (click)="passwordField.type === 'password' ? passwordField.type = 'text' : passwordField.type = 'password'"
+                            matSuffix>
+                            <mat-icon
+                                class="icon-size-5"
+                                *ngIf="passwordField.type === 'password'"
+                                [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                            <mat-icon
+                                class="icon-size-5"
+                                *ngIf="passwordField.type === 'text'"
+                                [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                        </button>
+                        <mat-error>
+                            Password is required
+                        </mat-error>
+                    </mat-form-field>
+
+                    <div class="password-strength" *ngIf="signUpForm.get('password').value">
+                        <div>Password Strength: {{passwordStrengthText}}</div>
+                        <div class="strength-bar">
+                            <div [ngStyle]="{
+                                'width': (passwordStrength * 20) + '%',
+                                'background-color': 
+                                    passwordStrength <= 1 ? '#ff4444' :
+                                    passwordStrength <= 3 ? '#ffbb33' : '#00C851'
+                            }"></div>
+                        </div>
+                    </div>
+                    <!-- Confirm Password field -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Confirm Password</mat-label>
+                        <input
+                            id="re-password"
+                            matInput
+                            type="password"
+                            [formControlName]="'passwordConfirm'"
+                            #confirmPasswordField>
+                        <button
+                            mat-icon-button
+                            type="button"
+                            (click)="confirmPasswordField.type === 'password' ? confirmPasswordField.type = 'text' : confirmPasswordField.type = 'password'"
+                            matSuffix>
+                            <mat-icon
+                                class="icon-size-5"
+                                *ngIf="confirmPasswordField.type === 'password'"
+                                [svgIcon]="'heroicons_solid:eye'"></mat-icon>
+                            <mat-icon
+                                class="icon-size-5"
+                                *ngIf="confirmPasswordField.type === 'text'"
+                                [svgIcon]="'heroicons_solid:eye-off'"></mat-icon>
+                        </button>
+                        <mat-error *ngIf="signUpForm.get('passwordConfirm').hasError('required')">
+                            Confirm Password is required
+                        </mat-error>
+                        <mat-error *ngIf="signUpForm.get('passwordConfirm').hasError('passwordMismatch')">
+                            Passwords must match
+                        </mat-error>
+                    </mat-form-field>
+
+                    <!-- Company field -->
+                    <!-- <mat-form-field class="w-full">
+                        <mat-label>Company</mat-label>
+                        <input
+                            id="company-confirm"
+                            matInput
+                            [formControlName]="'company'">
+                    </mat-form-field> -->
+
+                    <!-- ToS and PP -->
+                    <div class="inline-flex items-end w-full mt-1.5">
+                        <mat-checkbox
+                            [color]="'primary'"
+                            [formControlName]="'agreements'">
+                            <span>I agree to the</span>
+                            <a
+                                class="ml-1 text-primary-500 hover:underline"
+                                [routerLink]="['./']">Terms of Service
+                            </a>
+                            <span>and</span>
+                            <a
+                                class="ml-1 text-primary-500 hover:underline"
+                                [routerLink]="['./']">Privacy Policy
+                            </a>
+                        </mat-checkbox>
+                    </div>
+
+                    <!-- Submit button -->
+                    <button
+                        class="w-full mt-6 fuse-mat-button-large"
+                        mat-flat-button
+                        [color]="'primary'"
+                        [disabled]="signUpForm.disabled || !signUpForm.get('agreements').value"
+                        (click)="signUp()">
+                        <span *ngIf="!signUpForm.disabled">
+                            Create your free account
+                        </span>
+                        <mat-progress-spinner
+                            *ngIf="signUpForm.disabled"
+                            [diameter]="24"
+                            [mode]="'indeterminate'"></mat-progress-spinner>
+                    </button>
+
+                </form>
+            </div>
+        </div>
+        <div class="relative items-center justify-center flex-auto hidden h-full p-16 overflow-hidden bg-blue-200 md:flex lg:px-28 dark:border-l"
+        style="background-image: url(./../../../../assets/images/logo/logo.png);
+               background-repeat: no-repeat;
+               background-position: center;
+               background-size: contain; z-index: 1;">
+        <!-- Background - @formatter:off -->
+        <!-- Rings -->
+        <svg class="absolute inset-0 pointer-events-none" viewBox="0 0 960 540" width="100%" height="100%"
+            preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+            <g class="text-blue-500 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+                <circle r="234" cx="196" cy="23"></circle>
+                <circle r="234" cx="790" cy="491"></circle>
+            </g>
+        </svg>
+        <!-- Dots -->
+        <svg class="absolute inset-0 pointer-events-none" viewBox="0 0 960 540" width="100%" height="100%"
+        preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg">
+        <g class="text-blue-500 opacity-15" fill="none" stroke="currentColor" stroke-width="2">
+            <!-- Medical Cross -->
+            <path d="M196 23 M176 23 L216 23 M196 3 L196 43" stroke-width="8"/>
+            <path d="M790 491 M770 491 L810 491 M790 471 L790 511" stroke-width="8"/>
+            
+            <!-- Heart Rate Line -->
+            <path d="M100 200 L150 200 L170 150 L190 250 L210 200 L260 200" stroke-width="3"/>
+            <path d="M700 300 L750 300 L770 250 L790 350 L810 300 L860 300" stroke-width="3"/>
+            
+            <!-- Stethoscope simplified shape -->
+            <circle r="20" cx="300" cy="150"/>
+            <path d="M300 170 C300 200, 320 220, 320 250" stroke-width="3"/>
+        </g>
+    </svg>
+    <!-- Subtle Medical Pattern -->
+    <svg class="absolute text-blue-100 -top-16 -right-16" viewBox="0 0 220 192" width="220" height="192"
+        fill="none">
+        <defs>
+            <pattern id="medical-pattern" x="0" y="0" width="20" height="20"
+                patternUnits="userSpaceOnUse">
+                <!-- Small Cross Pattern -->
+                <path d="M8 6 L12 6 M10 4 L10 8" stroke="currentColor" stroke-width="0.5"/>
+            </pattern>
+        </defs>
+        <rect width="220" height="192" fill="url(#medical-pattern)"></rect>
+    </svg>
+
+    </div>
+    </div>
+</div>

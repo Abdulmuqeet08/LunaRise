@@ -1,0 +1,1 @@
+require('resources/appconfig/apis/appconfig-api.js');

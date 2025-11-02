@@ -1,0 +1,38 @@
+.password-strength {
+    margin-top: 8px;
+    margin-bottom: 16px;
+    font-size: 0.875rem;
+    
+    .strength-bar {
+        height: 5px;
+        background-color: #eee;
+        margin-top: 4px;
+        border-radius: 2px;
+        overflow: hidden;
+        
+        > div {
+            height: 100%;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+    }
+}
+
+/* Optional: Add some spacing and styling for the text */
+.password-strength-text {
+    color: #666;
+    margin-bottom: 4px;
+}
+
+/* Optional: Add specific colors for different strength levels */
+.strength-weak {
+    color: #ff4444;
+}
+
+.strength-medium {
+    color: #ffbb33;
+}
+
+.strength-strong {
+    color: #00C851;
+} 

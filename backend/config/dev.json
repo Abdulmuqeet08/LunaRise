@@ -1,0 +1,35 @@
+{
+  "port": 4201,
+  "env": "dev",
+  "email": {
+    "no_reply": {
+      "user": "",
+      "password": ""
+    }
+  },
+  "jwt_secret": "P4U_H3ALTHCAR3",
+  "enableGoogleLogger": false,
+  "logger": {
+    "project": "P4U_HEALTHCARE_DEV",
+    "keyFile": "./logs_config/dev.json"
+  },
+  "server": true,
+  "sms": {
+    "plivo": {
+      "auth_id": "auth_id",
+      "auth_token": "auth_token"
+    },
+    "karix": {
+      "url": "karix_url"
+    }
+  },
+  "fcm": {
+    "path": "",
+    "url": ""
+  },  
+  "backendUrl": "https://p4uhealthcare.com", 
+  "gatewayUrl": "https://p4uhealthcare.com",
+  "postpath":"../../../../../p4uhealthcaremain/src/assets/profile/post",
+  "profileavatarpath":"../../../../../p4uhealthcaremain/src/assets/profile/profile_avatar",
+  "bannerpath":"../../../../../p4uhealthcaremain/src/assets/profile/banner"
+}
